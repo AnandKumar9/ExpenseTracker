@@ -1,3 +1,4 @@
+import enum
 from enum import Enum
 
 class MerchantCategory(Enum):
@@ -6,9 +7,14 @@ class MerchantCategory(Enum):
     Coffee = 'Coffee, etc.'
     FastFood = 'Fast Food',
     Gas = 'Gas, Parking, Tolls'
+    Car = 'Car'
     HouseRent = 'House Rent'
+    ElectricityBill = 'Electricity Bill'
+    WaterBill = 'Water Bill'
+    GasBill = 'Gas Bill'
     HouseholdStuff = 'Household Stuff'
     Streaming = 'Streaming Services'
+    Movies = 'Movies'
     BooksAndMagazines = 'Books, Magazines',
     ClothesAndShoes = 'Clothes And Shoes'
     Other1 = 'Other 1'
