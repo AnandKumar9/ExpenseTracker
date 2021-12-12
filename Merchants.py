@@ -1,113 +1,154 @@
-import enum
 from enum import Enum
 
-class MerchantCategory(Enum):
+class Expense:
+    rawMerchantName = None
+    merchantName = None
+    category = None
+    transactionDate = None
+    transactionAmount = None
+
+    def __init__(self, rawMerchantName, merchantName, category, transactionDate, transactionAmount):
+        self.rawMerchantName = rawMerchantName
+        self.merchantName = merchantName
+        self.category = category
+        self.transactionDate = transactionDate
+        self.transactionAmount = transactionAmount
+
+class ExpenseCategory(Enum):
     Groceries = 'Groceries'
     Meal = 'Meal'
     Coffee = 'Coffee, etc.'
-    FastFood = 'Fast Food',
+    FastFood = 'Fast Food'
     Gas = 'Gas, Parking, Tolls'
     Car = 'Car'
     HouseRent = 'House Rent'
     ElectricityBill = 'Electricity Bill'
     WaterBill = 'Water Bill'
     GasBill = 'Gas Bill'
+    Healthcare = 'Healthcare'
     HouseholdStuff = 'Household Stuff'
     Streaming = 'Streaming Services'
     Movies = 'Movies'
-    BooksAndMagazines = 'Books, Magazines',
+    BooksAndMagazines = 'Books, Magazines'
     ClothesAndShoes = 'Clothes And Shoes'
     Other1 = 'Other 1'
     Other2 = 'Other 2'
     AllElse = 'All Else'
+    Unknown = 'Unknown'
 
 merchants = {
 
     # Groceries
-    'ADITI': ('Aditi Spice Depot', MerchantCategory.Groceries),
-    'GIANT': ('Giant', MerchantCategory.Groceries),
-    'HARRIS': ('Harris Teeter', MerchantCategory.Groceries),
-    'INDIAN SPICES': ('Indian Spices', MerchantCategory.Groceries),
-    'PATEL BROTHER': ('Patel Brothers', MerchantCategory.Groceries),
-    'WHOLEFDS': ('Whole Foods', MerchantCategory.Groceries),
+    'ADITI': ('Aditi Spice Depot', ExpenseCategory.Groceries),
+    'COSTCO': ('Costco', ExpenseCategory.Groceries),
+    'GIANT': ('Giant', ExpenseCategory.Groceries),
+    'HARRIS': ('Harris Teeter', ExpenseCategory.Groceries),
+    'INDIAN SPICES': ('Indian Spices', ExpenseCategory.Groceries),
+    'PATEL BROTHER': ('Patel Brothers', ExpenseCategory.Groceries),
+    'WHOLEFDS': ('Whole Foods', ExpenseCategory.Groceries),
 
     # Meal
-    'TST* A2B - HERNDON': ('A2B', MerchantCategory.Meal),
-    'BAWARCHI': ('Bawarchi', MerchantCategory.Meal),
-    'BUSBOYS AND POETS': ('Busboys and Poets', MerchantCategory.Meal),
-    'BUFFALO': ('Buffalo Wild Wings', MerchantCategory.Meal),
-    'CAVA PIKE 7 PLAZA': ('Cava', MerchantCategory.Meal),
-    'CHINA EXPRESS': ('China Express', MerchantCategory.Meal),
-    'CRUST PIZZERIA NAPOLET': ('Crust', MerchantCategory.Meal),
-    'DISTRICT TACO 5723': ('District Taco', MerchantCategory.Meal),
-    'DOMINO\'S': ('Domino\'s', MerchantCategory.Meal),
-    'HONG KONG PALACE': ('Hong Kong Palace', MerchantCategory.Meal),
-    'IHOP': ('IHOP', MerchantCategory.Meal),
-    'OLIVE': ('Olive Garden', MerchantCategory.Meal),
-    'NOODLES': ('Noodles & Co', MerchantCategory.Meal),
-    'MCDONALDS': ('McDonald\'s', MerchantCategory.Meal),
-    'MOBY': ('Moby Dick', MerchantCategory.Meal),
-    'NATTA THAI CUISINE': ('Natta Thai', MerchantCategory.Meal),
-    'PANERA': ('Panera Bread', MerchantCategory.Meal),
-    'PASTRY CORNER': ('Pastry Corner', MerchantCategory.Meal),
-    'PEKING': ('Peking Express', MerchantCategory.Meal),
-    'PIND INDIAN CUISINE': ('Pind Cuisine', MerchantCategory.Meal),
-    'PIZZA HUT': ('Pizza Hut', MerchantCategory.Meal),
-    'QDOBA': ('QDoba', MerchantCategory.Meal),
-    'TST* ROLL PLAY TYSONS': ('Roll Play', MerchantCategory.Meal),
-    'PARADISE BIRYANI P': ('Paradise Pointe Biryani', MerchantCategory.Meal),
-    'SideBar': ('SideBar', MerchantCategory.Meal),
-    'Subway': ('Subway', MerchantCategory.Meal),
-    'SWEET LEAF': ('Sweet Leaf', MerchantCategory.Meal),
-    'SWEETGREEN': ('Sweet Green', MerchantCategory.Meal),
-    'TARA THAI RESTAURANT': ('Tara Thai', MerchantCategory.Meal),
-    'TST* TOOSSO PAKISTANI': ('Toosso', MerchantCategory.Meal),
-    'WOODLANDS RESTAURANT': ('Woodlands', MerchantCategory.Meal),
+    'A2B - HERNDON': ('A2B', ExpenseCategory.Meal),
+    'BAWARCHI': ('Bawarchi', ExpenseCategory.Meal),
+    'BAGEL CAFE': ('Bagel Cafe', ExpenseCategory.Meal),
+    'BUSBOYS AND POETS': ('Busboys and Poets', ExpenseCategory.Meal),
+    'BUFFALO': ('Buffalo Wild Wings', ExpenseCategory.Meal),
+    'CAVA PIKE 7 PLAZA': ('Cava', ExpenseCategory.Meal),
+    'CHINA EXPRESS': ('China Express', ExpenseCategory.Meal),
+    'CRUST PIZZERIA NAPOLET': ('Crust', ExpenseCategory.Meal),
+    'DISTRICT TACO 5723': ('District Taco', ExpenseCategory.Meal),
+    'DOMINO\'S': ('Domino\'s', ExpenseCategory.Meal),
+    'HONG KONG PALACE': ('Hong Kong Palace', ExpenseCategory.Meal),
+    'IHOP': ('IHOP', ExpenseCategory.Meal),
+    'NOODLES': ('Noodles & Co', ExpenseCategory.Meal),
+    'MCDONALDS': ('McDonald\'s', ExpenseCategory.Meal),
+    'MOBY': ('Moby Dick', ExpenseCategory.Meal),
+    'NATTA THAI CUISINE': ('Natta Thai', ExpenseCategory.Meal),
+    'OLIVE': ('Olive Garden', ExpenseCategory.Meal),
+    'PANERA': ('Panera Bread', ExpenseCategory.Meal),
+    'PASTRY CORNER': ('Pastry Corner', ExpenseCategory.Meal),
+    'PEKING': ('Peking Express', ExpenseCategory.Meal),
+    'PIND INDIAN CUISINE': ('Pind Cuisine', ExpenseCategory.Meal),
+    'PIZZA HUT': ('Pizza Hut', ExpenseCategory.Meal),
+    'QDOBA': ('QDoba', ExpenseCategory.Meal),
+    'ROLL PLAY TYSONS': ('Roll Play', ExpenseCategory.Meal),
+    'PARADISE BIRYANI P': ('Paradise Pointe Biryani', ExpenseCategory.Meal),
+    'SideBar': ('SideBar', ExpenseCategory.Meal),
+    'Subway': ('Subway', ExpenseCategory.Meal),
+    'SWEET LEAF': ('Sweet Leaf', ExpenseCategory.Meal),
+    'SWEETLEAF': ('Sweet Leaf', ExpenseCategory.Meal),
+    'SWEETGREEN': ('Sweet Green', ExpenseCategory.Meal),
+    'TARA THAI RESTAURANT': ('Tara Thai', ExpenseCategory.Meal),
+    'TOOSSO PAKISTANI': ('Toosso', ExpenseCategory.Meal),
+    'WOODLANDS RESTAURANT': ('Woodlands', ExpenseCategory.Meal),
 
     # Coffee
-    'DUNKIN': ('Dunkin\' Donuts', MerchantCategory.Coffee),
-    'KUNG FU TEA': ('Kung Fu Tea', MerchantCategory.Coffee),
-    'SHARE TEA': ('Share Tea', MerchantCategory.Coffee),
-    'STARBUCKS': ('Starbucks', MerchantCategory.Coffee),
+    'DUNKIN': ('Dunkin\' Donuts', ExpenseCategory.Coffee),
+    'KUNG FU TEA': ('Kung Fu Tea', ExpenseCategory.Coffee),
+    'SHARE TEA': ('Share Tea', ExpenseCategory.Coffee),
+    'STARBUCKS': ('Starbucks', ExpenseCategory.Coffee),
 
     # Fast Food
-    'BASKIN': ('Baskin Robbins', MerchantCategory.FastFood),
-    'BEN & JERRY\'S': ('Ben & Jerry\'s', MerchantCategory.FastFood),
-    'COLDSTONE': ('Coldstone', MerchantCategory.FastFood),
-    'DUCK DONUTS HERNDON, V': ('Duck Donuts', MerchantCategory.FastFood),
-    'JENI\'S SPLENDID I': ('Jeni\'s Splendid Ice Cream', MerchantCategory.FastFood),
+    'BASKIN': ('Baskin Robbins', ExpenseCategory.FastFood),
+    'BEN & JERRY\'S': ('Ben & Jerry\'s', ExpenseCategory.FastFood),
+    'COLDSTONE': ('Coldstone', ExpenseCategory.FastFood),
+    'DUCK DONUTS HERNDON, V': ('Duck Donuts', ExpenseCategory.FastFood),
+    'JENI\'S SPLENDID I': ('Jeni\'s Splendid Ice Cream', ExpenseCategory.FastFood),
 
     # House Rent
-    'STATE FARM  INSURANCE': ('State Farm Insurance', MerchantCategory.HouseRent),
+    'AVALON': ('Avalon Tysons Corner', ExpenseCategory.HouseRent),
+    'STATE FARM INSURANCE': ('State Farm Insurance', ExpenseCategory.HouseRent),
+
+    # Electricity Bill
+    'DOMINION': ('Dominion Energy', ExpenseCategory.ElectricityBill),
+
+    # Gas Bill
+    'WASHINGTON GAS': ('Washington Gas', ExpenseCategory.GasBill),
+
+    # Water Bill
+    'AVALON WATER': ('Water Bill, Conservice', ExpenseCategory.WaterBill),
 
     # Gas
-    'EXXONMOBIL': ('Exxon', MerchantCategory.Gas),
-    'SHELL': ('Shell Oil', MerchantCategory.Gas),
-    'SUNOCO': ('Sunoco', MerchantCategory.Gas),
+    'COSTCO GAS': ('Costco Gas', ExpenseCategory.Gas),
+    'EXXONMOBIL': ('Exxon', ExpenseCategory.Gas),
+    'E Z PASS VA WEB': ('EZ Pass', ExpenseCategory.Gas),
+    'SHELL': ('Shell Oil', ExpenseCategory.Gas),
+    'SUNOCO': ('Sunoco', ExpenseCategory.Gas),
+
+    # Car
+    'BMW OF FAIRFAX': ('BMW', ExpenseCategory.Car),
+    'PROGRESSIVE': ('Progressive Car Insurance', ExpenseCategory.Car),
+
+    # Healthcare
+    'CVS/SPECIALTY': ('CVS/SPECIALTY', ExpenseCategory.Healthcare),
+    'SGF': ('SGF', ExpenseCategory.Healthcare),
 
     # Household Stuff
-    'TARGET': ('Target', MerchantCategory.HouseholdStuff),
+    'IKEA': ('Ikea', ExpenseCategory.HouseholdStuff),
+    'TARGET': ('Target', ExpenseCategory.HouseholdStuff),
 
     # Streaming Services
-    'Amazon Prime': ('Amazon Prime', MerchantCategory.Streaming),
-    'APPLE.COM/BILL': ('Apple', MerchantCategory.Streaming),
-    'HELP.HBOMAX.COM': ('HBO', MerchantCategory.Streaming),
-    'Spotify USA': ('Spotify', MerchantCategory.Streaming),
-    'SXM*SIRIUSXM.COM/ACCT': ('SiriusXM', MerchantCategory.Streaming),
-    'VUDU.COM': ('Vudu', MerchantCategory.Streaming),
+    'Amazon Prime': ('Amazon Prime', ExpenseCategory.Streaming),
+    'APPLE.COM/BILL': ('Apple TV', ExpenseCategory.Streaming),
+    'Audible': ('Audible', ExpenseCategory.Streaming),
+    'HELP.HBOMAX.COM': ('HBO', ExpenseCategory.Streaming),
+    'Prime Video': ('Prime Video Rental', ExpenseCategory.Streaming),
+    'Spotify USA': ('Spotify', ExpenseCategory.Streaming),
+    'SXM*SIRIUSXM.COM/ACCT': ('SiriusXM', ExpenseCategory.Streaming),
+    'VUDU.COM': ('Vudu', ExpenseCategory.Streaming),
 
     # Books, Magazines
-    'NYTimes*NYTimes': ('NYTimes', MerchantCategory.BooksAndMagazines),
-    'RAZ*BLACKCURRANT APPS': ('Splainer', MerchantCategory.BooksAndMagazines),
-    'TWP*PROMO43231056': ('Washington Post', MerchantCategory.BooksAndMagazines),
+    'NYTimes*NYTimes': ('NYTimes', ExpenseCategory.BooksAndMagazines),
+    'RAZ*BLACKCURRANT APPS': ('Splainer', ExpenseCategory.BooksAndMagazines),
+    'TWP*PROMO43231056': ('Washington Post', ExpenseCategory.BooksAndMagazines),
 
     # Clothes and Shoes
-    'TEEPUBLIC': ('Tee Public', MerchantCategory.ClothesAndShoes),
+    'TEEPUBLIC': ('Tee Public', ExpenseCategory.ClothesAndShoes),
 
     # All Else
-    '7-ELEVEN': ('7-Eleven', MerchantCategory.AllElse),
-    'BATH & BODY WORKS 3050': ('Bath & Body Works', MerchantCategory.AllElse),
-    'CVS/PHARMACY': ('CVS', MerchantCategory.AllElse),
-    'HAIR CUTTERY': ('Hair Cuttery', MerchantCategory.AllElse),
-    'STAPLES': ('Staples', MerchantCategory.AllElse),
+    '7-ELEVEN': ('7-Eleven', ExpenseCategory.AllElse),
+    'BATH & BODY WORKS 3050': ('Bath & Body Works', ExpenseCategory.AllElse),
+    'CVS/PHARMACY': ('CVS', ExpenseCategory.AllElse),
+    'HAIR CUTTERY': ('Hair Cuttery', ExpenseCategory.AllElse),
+    'STAPLES': ('Staples', ExpenseCategory.AllElse),
 }
