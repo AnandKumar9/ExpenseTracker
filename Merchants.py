@@ -58,6 +58,7 @@ merchants = {
     'CRUST PIZZERIA NAPOLET': ('Crust', ExpenseCategory.Meal),
     'DISTRICT TACO 5723': ('District Taco', ExpenseCategory.Meal),
     'DOMINO\'S': ('Domino\'s', ExpenseCategory.Meal),
+    'FIRST WATCH': ('First Watch', ExpenseCategory.Meal),
     'HONG KONG PALACE': ('Hong Kong Palace', ExpenseCategory.Meal),
     'IHOP': ('IHOP', ExpenseCategory.Meal),
     'NOODLES': ('Noodles & Co', ExpenseCategory.Meal),
@@ -140,9 +141,10 @@ merchants = {
     # Books, Magazines
     'NYTimes*NYTimes': ('NYTimes', ExpenseCategory.BooksAndMagazines),
     'RAZ*BLACKCURRANT APPS': ('Splainer', ExpenseCategory.BooksAndMagazines),
-    'TWP*PROMO43231056': ('Washington Post', ExpenseCategory.BooksAndMagazines),
+    'Washington Post': ('Washington Post', ExpenseCategory.BooksAndMagazines),
 
     # Clothes and Shoes
+    'BANANA REPUBLIC': ('Banana Republic', ExpenseCategory.ClothesAndShoes),
     'TEEPUBLIC': ('Tee Public', ExpenseCategory.ClothesAndShoes),
 
     # All Else

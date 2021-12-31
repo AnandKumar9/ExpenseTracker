@@ -62,6 +62,11 @@ def parseTransactionsFromCSVFile():
                         csv_rawMerchantName_FirstWord = csv_rawMerchantName_Words[0].replace('\'', '')
                         candidateKeys.append(csv_rawMerchantName_FirstWord)
 
+                        csv_rawMerchantName_FirstOneOrTwoWords = ((csv_rawMerchantName_Words[0] + " " + csv_rawMerchantName_Words[1])
+                                                                  if (len(csv_rawMerchantName_Words) >= 2)
+                                                                  else csv_rawMerchantName_Words[0]).replace('\'', '')
+                        candidateKeys.append(csv_rawMerchantName_FirstOneOrTwoWords)
+
                         # Looks for trailing 4-5 digits. Useful when just the first word alone is not definitively distinct.
                         # Example - HAIR CUTTERY 1827
                         csv_rawMerchantName_TrimDigits = re.sub(r"(.*) (\d){4,5}", r"\1", row[3])
@@ -106,6 +111,10 @@ def parseTransactionsFromCSVFile():
                         # Example - TST* SWEET LEAF - MCLE, TST* SWEET LEAF - VIEN
                         csv_rawMerchantName_SweetLeaf = re.sub(r".*SWEET LEAF.*", r"SWEET LEAF", row[3])
                         candidateKeys.append(csv_rawMerchantName_SweetLeaf)
+
+                        # Example - TWP*SUB43231056
+                        csv_rawMerchantName_WashingtonPost = re.sub(r"TWP\*.*", r"Washington Post", row[3])
+                        candidateKeys.append(csv_rawMerchantName_WashingtonPost)
 
                         return candidateKeys
 
