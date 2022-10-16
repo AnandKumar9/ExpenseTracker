@@ -6,8 +6,9 @@ import re
 
 def parseTransactionsFromCSVFile():
 
-    directory = '/Volumes/GoogleDrive/My Drive/Synced/Monetary/Purse Strings/US/US Purse Strings/'
-
+    # directory = '/Volumes/GoogleDrive/My Drive/Synced/Monetary/Expenses/US/US Expenses/'
+    directory = '/Users/anand/Library/CloudStorage/GoogleDrive-write2anand.kumar@gmail.com/My Drive/Synced/Monetary/Expenses/US/US Expenses/'
+    print("Hi")
     matchingFilePaths = []
     for _, _, files in os.walk(directory):
         regex = re.compile('.*_transaction_download\.csv')
@@ -67,11 +68,19 @@ def parseTransactionsFromCSVFile():
                                                                   else csv_rawMerchantName_Words[0]).replace('\'', '')
                         candidateKeys.append(csv_rawMerchantName_FirstOneOrTwoWords)
 
+                        # Looks for leading 4-5 digits. Useful when a merchant has some 4-5 digits in beginning.
+                        # Example - 10046 CAVA PIKE 7 PLZ
+                        csv_rawMerchantName_TrimLeadingDigits = re.sub(r"(\d){4,5} (.*)", r"\2", row[3])
+                        candidateKeys.append(csv_rawMerchantName_TrimLeadingDigits)
+                        csv_rawMerchantName_TrimmedLeadingDigitsFirstWord = csv_rawMerchantName_TrimLeadingDigits.split()[0]
+                        candidateKeys.append(csv_rawMerchantName_TrimmedLeadingDigitsFirstWord)
+
                         # Looks for trailing 4-5 digits. Useful when just the first word alone is not definitively distinct.
                         # Example - HAIR CUTTERY 1827
-                        csv_rawMerchantName_TrimDigits = re.sub(r"(.*) (\d){4,5}", r"\1", row[3])
-                        candidateKeys.append(csv_rawMerchantName_TrimDigits)
-
+                        csv_rawMerchantName_TrimTrailingDigits = re.sub(r"(.*) (\d){4,5}", r"\1", row[3])
+                        candidateKeys.append(csv_rawMerchantName_TrimTrailingDigits)
+                        print(row[3])
+                        print(csv_rawMerchantName_TrimLeadingDigits)
                         # Looks for patterns for payment provider LevelUp when followed by 4 digits
                         # Replaces `LEVELUP<MerchantName><4 digits>` with `<MerchantName>`
                         # Example - LEVELUPSWEETGREEN8555
@@ -84,11 +93,17 @@ def parseTransactionsFromCSVFile():
                         csv_rawMerchantName_TrimLevelUp5Digits = re.sub(r"LEVELUP(.*)(\d){5}", r"\1", row[3])
                         candidateKeys.append(csv_rawMerchantName_TrimLevelUp5Digits)
 
-                        # Looks for patterns for payment providers PayPal, Square, Toast
-                        # Replaces `PP<MerchantName>`, `TST <MerchantName>`, `SQ *<MerchantName>` with `<MerchantName>`
-                        # Examples - PP*KUNG FU TEA, TST* TOOSSO PAKISTANI, SQ *BEN & JERRY'S FAIR
-                        csv_rawMerchantName_TrimProviders = re.sub(r"(PP\*|TST\* |SQ \*)(.*)", r"\2", row[3])
+                        # Looks for patterns for payment providers PayPal, Square, Toast, Grubhub
+                        # Replaces `PP<MerchantName>`, `TST <MerchantName>`, `SQ *<MerchantName>`, `GRUBHUB* <MerchantName>` with `<MerchantName>`
+                        # Examples - PP*KUNG FU TEA, TST* TOOSSO PAKISTANI, SQ *BEN & JERRY'S FAIR, GRUBHUB* CHINAEXPRESS
+                        csv_rawMerchantName_TrimProviders = re.sub(r"(PP\*|TST\* |SQ \*|GRUBHUB\* )(.*)", r"\2", row[3])
                         candidateKeys.append(csv_rawMerchantName_TrimProviders)
+
+                        # Looks for a specific patterns for Grubhub
+                        # Replaces `GRUBHUB<MerchantName>` with `<MerchantName>`
+                        # Examples - GRUBHUBCHINAEXPRESS
+                        csv_rawMerchantName_TrimGrubhub = re.sub(r"(GRUBHUB)(.*)", r"\2", row[3])
+                        candidateKeys.append(csv_rawMerchantName_TrimGrubhub)
 
                         # Peculiar patterns
 
@@ -109,7 +124,7 @@ def parseTransactionsFromCSVFile():
                         candidateKeys.append(csv_rawMerchantName_PrimeVideo)
 
                         # Example - TST* SWEET LEAF - MCLE, TST* SWEET LEAF - VIEN
-                        csv_rawMerchantName_SweetLeaf = re.sub(r".*SWEET LEAF.*", r"SWEET LEAF", row[3])
+                        csv_rawMerchantName_SweetLeaf = re.sub(r".*Sweet Leaf.*", r"Sweet Leaf", row[3])
                         candidateKeys.append(csv_rawMerchantName_SweetLeaf)
 
                         # Example - TWP*SUB43231056
@@ -129,6 +144,9 @@ def parseTransactionsFromCSVFile():
                     merchantName, merchantType = determineMerchantNameAndCategory()
                     transactionAmount = csv_transactionAmount
                     transactionDate = csv_transactionDate
+
+                    if merchantName == "Washington Gas":
+                        print(merchantName)
 
                     if merchantName == "Avalon Tysons Corner":
                         monthlyRent = 2335

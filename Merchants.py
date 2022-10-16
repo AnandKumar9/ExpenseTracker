@@ -51,24 +51,35 @@ merchants = {
     'A2B - HERNDON': ('A2B', ExpenseCategory.Meal),
     'BAWARCHI': ('Bawarchi', ExpenseCategory.Meal),
     'BAGEL CAFE': ('Bagel Cafe', ExpenseCategory.Meal),
+    'BOMBAY CAFE': ('Bombay Cafe', ExpenseCategory.Meal),
     'BUSBOYS AND POETS': ('Busboys and Poets', ExpenseCategory.Meal),
     'BUFFALO': ('Buffalo Wild Wings', ExpenseCategory.Meal),
-    'CAVA PIKE 7 PLAZA': ('Cava', ExpenseCategory.Meal),
+    'CAVA': ('Cava', ExpenseCategory.Meal),
+    'CHICK-FIL-A': ('Chick-Fil-A', ExpenseCategory.Meal),
     'CHINA EXPRESS': ('China Express', ExpenseCategory.Meal),
+    'CHINAEXPRESS': ('China Express', ExpenseCategory.Meal),
     'CRUST PIZZERIA NAPOLET': ('Crust', ExpenseCategory.Meal),
+    'CRUST PIZZERIA VIE': ('Crust', ExpenseCategory.Meal),
+    'DECLIEU COFFEE & SANDW': ('DeClieu Coffee & Sandwich', ExpenseCategory.Meal),
     'DISTRICT TACO 5723': ('District Taco', ExpenseCategory.Meal),
     'DOMINO\'S': ('Domino\'s', ExpenseCategory.Meal),
+    'DWARAKAS BAWARCHI': ('Bawarchi Centreville', ExpenseCategory.Meal),
     'FIRST WATCH': ('First Watch', ExpenseCategory.Meal),
     'HONG KONG PALACE': ('Hong Kong Palace', ExpenseCategory.Meal),
     'IHOP': ('IHOP', ExpenseCategory.Meal),
-    'NOODLES': ('Noodles & Co', ExpenseCategory.Meal),
+    'McDonalds': ('McDonalds', ExpenseCategory.Meal),
     'MCDONALDS': ('McDonald\'s', ExpenseCategory.Meal),
     'MOBY': ('Moby Dick', ExpenseCategory.Meal),
+    'MOD PIZZA': ('Mod Pizza', ExpenseCategory.Meal),
+    'NOODLES': ('Noodles & Co', ExpenseCategory.Meal),
     'NATTA THAI CUISINE': ('Natta Thai', ExpenseCategory.Meal),
+    'Northside Social': ('Northside Social', ExpenseCategory.Meal),
     'OLIVE': ('Olive Garden', ExpenseCategory.Meal),
     'PANERA': ('Panera Bread', ExpenseCategory.Meal),
     'PASTRY CORNER': ('Pastry Corner', ExpenseCategory.Meal),
+    'PARIS BAGUETTE -': ('Paris Baguette', ExpenseCategory.Meal),
     'PEKING': ('Peking Express', ExpenseCategory.Meal),
+    'POTBELLY': ('Potbelly', ExpenseCategory.Meal),
     'PIND INDIAN CUISINE': ('Pind Cuisine', ExpenseCategory.Meal),
     'PIZZA HUT': ('Pizza Hut', ExpenseCategory.Meal),
     'QDOBA': ('QDoba', ExpenseCategory.Meal),
@@ -76,10 +87,14 @@ merchants = {
     'PARADISE BIRYANI P': ('Paradise Pointe Biryani', ExpenseCategory.Meal),
     'SideBar': ('SideBar', ExpenseCategory.Meal),
     'Subway': ('Subway', ExpenseCategory.Meal),
+    'Sweet Leaf': ('Sweet Leaf', ExpenseCategory.Meal),
     'SWEET LEAF': ('Sweet Leaf', ExpenseCategory.Meal),
     'SWEETLEAF': ('Sweet Leaf', ExpenseCategory.Meal),
     'SWEETGREEN': ('Sweet Green', ExpenseCategory.Meal),
     'TARA THAI RESTAURANT': ('Tara Thai', ExpenseCategory.Meal),
+    'TATTE BAKERY - CL': ('Tatte Bakery', ExpenseCategory.Meal),
+    'THE SANDWICH SHOP': ('The Sandwich Shop', ExpenseCategory.Meal),
+    'Taco Rock Falls C': ('Taco Rock', ExpenseCategory.Meal),
     'TOOSSO PAKISTANI': ('Toosso', ExpenseCategory.Meal),
     'WOODLANDS RESTAURANT': ('Woodlands', ExpenseCategory.Meal),
 
@@ -95,6 +110,8 @@ merchants = {
     'COLDSTONE': ('Coldstone', ExpenseCategory.FastFood),
     'DUCK DONUTS HERNDON, V': ('Duck Donuts', ExpenseCategory.FastFood),
     'JENI\'S SPLENDID I': ('Jeni\'s Splendid Ice Cream', ExpenseCategory.FastFood),
+    'LIL CITY CREAMERY': ('Lil City Creamery', ExpenseCategory.Meal),
+    'WOODY`S ICE CREAM': ('Woody\'s Ice Cream', ExpenseCategory.FastFood),
 
     # House Rent
     'AVALON': ('Avalon Tysons Corner', ExpenseCategory.HouseRent),
@@ -118,7 +135,9 @@ merchants = {
 
     # Car
     'BMW OF FAIRFAX': ('BMW', ExpenseCategory.Car),
+    'FLAGSHIP CAR WASH VIEN': ('Car Wash, Flagship Car Wash', ExpenseCategory.Car),
     'PROGRESSIVE': ('Progressive Car Insurance', ExpenseCategory.Car),
+    'PROG ADVANCED': ('Progressive Car Insurance', ExpenseCategory.Car),
 
     # Healthcare
     'CVS/SPECIALTY': ('CVS/SPECIALTY', ExpenseCategory.Healthcare),
@@ -130,17 +149,22 @@ merchants = {
 
     # Streaming Services
     'Amazon Prime': ('Amazon Prime', ExpenseCategory.Streaming),
-    'APPLE.COM/BILL': ('Apple TV', ExpenseCategory.Streaming),
+    # 'APPLE.COM/BILL': ('Apple TV', ExpenseCategory.Streaming),
     'Audible': ('Audible', ExpenseCategory.Streaming),
     'HELP.HBOMAX.COM': ('HBO', ExpenseCategory.Streaming),
     'Prime Video': ('Prime Video Rental', ExpenseCategory.Streaming),
     'Spotify USA': ('Spotify', ExpenseCategory.Streaming),
     'SXM*SIRIUSXM.COM/ACCT': ('SiriusXM', ExpenseCategory.Streaming),
     'VUDU.COM': ('Vudu', ExpenseCategory.Streaming),
+    'WILLOW TV': ('Willow TV', ExpenseCategory.Streaming),
+
+    # Movies
+    'ICON @ TYSONS CORNER': ('Icon Cinemas', ExpenseCategory.Movies),
 
     # Books, Magazines
     'NYTimes*NYTimes': ('NYTimes', ExpenseCategory.BooksAndMagazines),
     'RAZ*BLACKCURRANT APPS': ('Splainer', ExpenseCategory.BooksAndMagazines),
+    'TWPSUB43231056': ('Washington Post', ExpenseCategory.BooksAndMagazines),
     'Washington Post': ('Washington Post', ExpenseCategory.BooksAndMagazines),
 
     # Clothes and Shoes
