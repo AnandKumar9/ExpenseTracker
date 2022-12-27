@@ -58,6 +58,7 @@ merchants = {
     'CHICK-FIL-A': ('Chick-Fil-A', ExpenseCategory.Meal),
     'CHINA EXPRESS': ('China Express', ExpenseCategory.Meal),
     'CHINAEXPRESS': ('China Express', ExpenseCategory.Meal),
+    'CHIPOTLE': ('Chipotle', ExpenseCategory.Meal),
     'CRUST PIZZERIA NAPOLET': ('Crust', ExpenseCategory.Meal),
     'CRUST PIZZERIA VIE': ('Crust', ExpenseCategory.Meal),
     'DECLIEU COFFEE & SANDW': ('DeClieu Coffee & Sandwich', ExpenseCategory.Meal),
@@ -69,6 +70,7 @@ merchants = {
     'IHOP': ('IHOP', ExpenseCategory.Meal),
     'McDonalds': ('McDonalds', ExpenseCategory.Meal),
     'MCDONALDS': ('McDonald\'s', ExpenseCategory.Meal),
+    'MEHRAN': ('Mehran', ExpenseCategory.Meal),
     'MOBY': ('Moby Dick', ExpenseCategory.Meal),
     'MOD PIZZA': ('Mod Pizza', ExpenseCategory.Meal),
     'NOODLES': ('Noodles & Co', ExpenseCategory.Meal),
@@ -92,17 +94,21 @@ merchants = {
     'SWEETLEAF': ('Sweet Leaf', ExpenseCategory.Meal),
     'SWEETGREEN': ('Sweet Green', ExpenseCategory.Meal),
     'TARA THAI RESTAURANT': ('Tara Thai', ExpenseCategory.Meal),
+    'TATTE BAKERY - BE': ('Tatte Bakery', ExpenseCategory.Meal),
     'TATTE BAKERY - CL': ('Tatte Bakery', ExpenseCategory.Meal),
     'THE SANDWICH SHOP': ('The Sandwich Shop', ExpenseCategory.Meal),
+    'TACO BAMBA': ('Taco Bamba', ExpenseCategory.Meal),
     'Taco Rock Falls C': ('Taco Rock', ExpenseCategory.Meal),
     'TOOSSO PAKISTANI': ('Toosso', ExpenseCategory.Meal),
     'WOODLANDS RESTAURANT': ('Woodlands', ExpenseCategory.Meal),
 
     # Coffee
+    'BASECAMP COFFEE': ('Basecamp Coffee', ExpenseCategory.Coffee),
     'DUNKIN': ('Dunkin\' Donuts', ExpenseCategory.Coffee),
     'KUNG FU TEA': ('Kung Fu Tea', ExpenseCategory.Coffee),
     'SHARE TEA': ('Share Tea', ExpenseCategory.Coffee),
     'STARBUCKS': ('Starbucks', ExpenseCategory.Coffee),
+    'TEADM FAIRFAX': ('Starbucks', ExpenseCategory.Coffee),
 
     # Fast Food
     'BASKIN': ('Baskin Robbins', ExpenseCategory.FastFood),
@@ -116,6 +122,7 @@ merchants = {
     # House Rent
     'AVALON': ('Avalon Tysons Corner', ExpenseCategory.HouseRent),
     'STATE FARM INSURANCE': ('State Farm Insurance', ExpenseCategory.HouseRent),
+    'STATE FARM  INSURANCE': ('State Farm Insurance', ExpenseCategory.HouseRent),
 
     # Electricity Bill
     'DOMINION': ('Dominion Energy', ExpenseCategory.ElectricityBill),

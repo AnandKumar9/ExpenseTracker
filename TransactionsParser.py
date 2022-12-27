@@ -149,7 +149,7 @@ def parseTransactionsFromCSVFile():
                         print(merchantName)
 
                     if merchantName == "Avalon Tysons Corner":
-                        monthlyRent = 2335
+                        monthlyRent = 2592
                         transactionAmount = monthlyRent/2
                         waterBill = round(float(csv_transactionAmount) - monthlyRent, 2)
 
