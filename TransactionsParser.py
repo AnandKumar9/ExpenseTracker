@@ -7,8 +7,8 @@ import re
 def parseTransactionsFromCSVFile():
 
     # directory = '/Volumes/GoogleDrive/My Drive/Synced/Monetary/Expenses/US/US Expenses/'
-    directory = '/Users/anand/Library/CloudStorage/GoogleDrive-write2anand.kumar@gmail.com/My Drive/Synced/Monetary/Expenses/US/US Expenses/'
-    print("Hi")
+    directory = '/Users/anandkumar/Library/CloudStorage/GoogleDrive-write2anand.kumar@gmail.com/My Drive/Synced/Monetary/Expenses/US/US Expenses'
+
     matchingFilePaths = []
     for _, _, files in os.walk(directory):
         regex = re.compile('.*_transaction_download\.csv')
@@ -79,8 +79,8 @@ def parseTransactionsFromCSVFile():
                         # Example - HAIR CUTTERY 1827
                         csv_rawMerchantName_TrimTrailingDigits = re.sub(r"(.*) (\d){4,5}", r"\1", row[3])
                         candidateKeys.append(csv_rawMerchantName_TrimTrailingDigits)
-                        print(row[3])
-                        print(csv_rawMerchantName_TrimLeadingDigits)
+                        # print(row[3])
+                        # print(csv_rawMerchantName_TrimLeadingDigits)
                         # Looks for patterns for payment provider LevelUp when followed by 4 digits
                         # Replaces `LEVELUP<MerchantName><4 digits>` with `<MerchantName>`
                         # Example - LEVELUPSWEETGREEN8555
@@ -96,7 +96,7 @@ def parseTransactionsFromCSVFile():
                         # Looks for patterns for payment providers PayPal, Square, Toast, Grubhub
                         # Replaces `PP<MerchantName>`, `TST <MerchantName>`, `SQ *<MerchantName>`, `GRUBHUB* <MerchantName>` with `<MerchantName>`
                         # Examples - PP*KUNG FU TEA, TST* TOOSSO PAKISTANI, SQ *BEN & JERRY'S FAIR, GRUBHUB* CHINAEXPRESS
-                        csv_rawMerchantName_TrimProviders = re.sub(r"(PP\*|TST\* |SQ \*|GRUBHUB\* )(.*)", r"\2", row[3])
+                        csv_rawMerchantName_TrimProviders = re.sub(r"(PP\*|TST\* |TST\*|SQ \*|GRUBHUB\* )(.*)", r"\2", row[3])
                         candidateKeys.append(csv_rawMerchantName_TrimProviders)
 
                         # Looks for a specific patterns for Grubhub
@@ -145,33 +145,82 @@ def parseTransactionsFromCSVFile():
                     transactionAmount = csv_transactionAmount
                     transactionDate = csv_transactionDate
 
-                    if merchantName == "Washington Gas":
-                        print(merchantName)
+                    # Shared expenses - Rent, Electricity Bill, Water Bill, Car Insurance
 
-                    if merchantName == "Avalon Tysons Corner":
-                        monthlyRent = 2592
+                    if merchantName == "ATLEY":
+                        monthlyRent = 2300
                         transactionAmount = monthlyRent/2
-                        waterBill = round(float(csv_transactionAmount) - monthlyRent, 2)
+                        standardGasBill = 15
+                        waterBill = round(float(csv_transactionAmount) - monthlyRent - standardGasBill, 2)
+
+                        monthlyRentExpense = Merchants.Expense(
+                            rawMerchantName="Atley",
+                            merchantName="Atley",
+                            category=Merchants.ExpenseCategory.HouseRent,
+                            transactionDate=csv_transactionDate,
+                            transactionAmount=monthlyRent/2,
+                            isShared=True
+                        )
+                        allExpenses.append(monthlyRentExpense)
+                        expensesBasedOnCategories[monthlyRentExpense.category].append(monthlyRentExpense)
 
                         waterBillExpense = Merchants.Expense(
-                            rawMerchantName=csv_rawMerchantName,
-                            merchantName=merchantName,
+                            rawMerchantName="Water, Atley",
+                            merchantName="Water, Atley",
                             category=Merchants.ExpenseCategory.WaterBill,
                             transactionDate=csv_transactionDate,
-                            transactionAmount=waterBill
+                            transactionAmount=waterBill/2,
+                            isShared=True
                         )
                         allExpenses.append(waterBillExpense)
                         expensesBasedOnCategories[waterBillExpense.category].append(waterBillExpense)
 
-                    expense = Merchants.Expense(
-                        rawMerchantName=csv_rawMerchantName,
-                        merchantName=merchantName,
-                        category=merchantType,
-                        transactionDate=transactionDate,
-                        transactionAmount=float(transactionAmount)
-                    )
-                    allExpenses.append(expense)
-                    expensesBasedOnCategories[expense.category].append(expense)
+                        gasBillExpense = Merchants.Expense(
+                            rawMerchantName="Gas, Atley",
+                            merchantName="Gas, Atley",
+                            category=Merchants.ExpenseCategory.GasBill,
+                            transactionDate=csv_transactionDate,
+                            transactionAmount=standardGasBill/2,
+                            isShared=True
+                        )
+                        allExpenses.append(gasBillExpense)
+                        expensesBasedOnCategories[gasBillExpense.category].append(gasBillExpense)
+
+                    elif merchantName == "Dominion Energy":
+                        electricityExpense = Merchants.Expense(
+                            rawMerchantName=csv_rawMerchantName,
+                            merchantName=merchantName,
+                            category=Merchants.ExpenseCategory.ElectricityBill,
+                            transactionDate=csv_transactionDate,
+                            transactionAmount=round(float(transactionAmount)/2, 2),
+                            isShared=True
+                        )
+                        allExpenses.append(electricityExpense)
+                        expensesBasedOnCategories[electricityExpense.category].append(electricityExpense)
+
+                    elif merchantName == "Progressive Car Insurance":
+                        carInsuranceExpense = Merchants.Expense(
+                            rawMerchantName=csv_rawMerchantName,
+                            merchantName=merchantName,
+                            category=Merchants.ExpenseCategory.Car,
+                            transactionDate=csv_transactionDate,
+                            transactionAmount=round(float(transactionAmount)/2, 2),
+                            isShared=True
+                        )
+                        allExpenses.append(carInsuranceExpense)
+                        expensesBasedOnCategories[carInsuranceExpense.category].append(carInsuranceExpense)
+
+                    else:
+                        expense = Merchants.Expense(
+                            rawMerchantName=csv_rawMerchantName,
+                            merchantName=merchantName,
+                            category=merchantType,
+                            transactionDate=transactionDate,
+                            transactionAmount=float(transactionAmount),
+                            isShared=False
+                        )
+                        allExpenses.append(expense)
+                        expensesBasedOnCategories[expense.category].append(expense)
 
                     def printExpense(expenseCategory=None, printAll=False):
                         if (merchantType == expenseCategory) or printAll:
@@ -205,8 +254,6 @@ def parseTransactionsFromCSVFile():
                 categoryTransactionsSum = round(functools.reduce(lambda a, b: a + b, categoryTransactionsList, 0), 2)
                 print(f'{expenseCategory.value}: {(len(categoryTransactionsList))} times - {categoryTransactionsSum}')
 
-            print('------------------------------------------------------------------------------')
-
             if not detailed:
                 return
 
@@ -234,3 +281,13 @@ def parseTransactionsFromCSVFile():
 
             print('------------------------------------------------------------------------------')
         printExpensesBasedOnCategories(detailed=False)
+        print('------------------------------------------------------------------------------')
+
+
+        def printSharedExpenses():
+            for expense in allExpenses[::-1]:
+                if expense.isShared:
+                    a = expense.merchantName.replace('\'', '\\\'')
+                    print(f'\'{expense.transactionDate} : {expense.category.value} : {a} : {expense.transactionAmount*2}\',')
+        print("SHARED EXPENSES:")
+        printSharedExpenses()
