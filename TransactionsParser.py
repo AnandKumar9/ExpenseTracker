@@ -148,7 +148,7 @@ def parseTransactionsFromCSVFile():
                     # Shared expenses - Rent, Electricity Bill, Water Bill, Car Insurance
 
                     if merchantName == "ATLEY":
-                        monthlyRent = 2300
+                        monthlyRent = 2409
                         transactionAmount = monthlyRent/2
                         standardGasBill = 15
                         waterBill = round(float(csv_transactionAmount) - monthlyRent - standardGasBill, 2)
