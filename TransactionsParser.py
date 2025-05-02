@@ -147,7 +147,7 @@ def parseTransactionsFromCSVFile():
 
                     # Shared expenses - Rent, Electricity Bill, Water Bill, Car Insurance
 
-                    if merchantName == "ATLEY":
+                    if merchantName == "Atley":
                         monthlyRent = 2409
                         transactionAmount = monthlyRent/2
                         standardGasBill = 15
@@ -209,6 +209,30 @@ def parseTransactionsFromCSVFile():
                         )
                         allExpenses.append(carInsuranceExpense)
                         expensesBasedOnCategories[carInsuranceExpense.category].append(carInsuranceExpense)
+
+                    elif merchantName == "7-Eleven" and transactionAmount == "2.18":
+                        sevenElevenCoffeeExpense = Merchants.Expense(
+                            rawMerchantName=csv_rawMerchantName,
+                            merchantName=merchantName,
+                            category=Merchants.ExpenseCategory.Coffee,
+                            transactionDate=csv_transactionDate,
+                            transactionAmount=transactionAmount,
+                            isShared=False
+                        )
+                        allExpenses.append(sevenElevenCoffeeExpense)
+                        expensesBasedOnCategories[sevenElevenCoffeeExpense.category].append(sevenElevenCoffeeExpense)
+
+                    elif merchantName == "APPLE.COM/BILL" and transactionAmount == "19.99":
+                        chatGPTSubscriptionExpense = Merchants.Expense(
+                            rawMerchantName=csv_rawMerchantName,
+                            merchantName="ChatGPT Subscription, Apple",
+                            category=Merchants.ExpenseCategory.AllElse,
+                            transactionDate=csv_transactionDate,
+                            transactionAmount=transactionAmount,
+                            isShared=False
+                        )
+                        allExpenses.append(chatGPTSubscriptionExpense)
+                        expensesBasedOnCategories[chatGPTSubscriptionExpense.category].append(chatGPTSubscriptionExpense)
 
                     else:
                         expense = Merchants.Expense(
